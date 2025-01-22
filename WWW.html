@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orange的网页</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Orange的网页</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#game" class="nav-link">游戏</a></li>
+            <li><a href="#tool" class="nav-link">工具</a></li>
+            <li><a href="#message-board" class="nav-link">留言板</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="game">
+            <h2>游戏</h2>
+            <div class="game-content">
+                <div class="game-item">
+                    <a href="https://ccctcs.netlify.app/" target="_blank">
+                        <img src="pic/ccctcs.png" alt="游戏图片">
+                        <p>贪吃蛇电脑版</p>
+                    </a>
+                </div>
+                <div class="game-item">
+                    <a href="https://ccctcs-phone-chu.netlify.app/" target="_blank">
+                        <img src="pic/ccctcsp1.png" alt="游戏图片手机1">
+                        <p>贪吃蛇手机触控版</p>
+                    </a>
+                </div>
+                <div class="game-item">
+                    <a href="https://ccctcs-phone-an.netlify.app/" target="_blank">
+                        <img src="pic/ccctcsp2.png" alt="游戏图片手机2">
+                        <p>贪吃蛇手机按键版</p>
+                    </a>
+                </div>
+                <!-- 后续添加更多游戏可继续添加 game-item 元素 -->
+            </div>
+        </section>
+        <section id="tool">
+            <h2>工具</h2>
+            <div class="tool-content">
+                <!-- 这里添加工具相关内容 -->
+                <p>都是实用的工具，能帮助你解决各种问题。</p>
+                <button class="tool-button">使用工具</button>
+            </div>
+        </section>
+        <section id="message-board">
+            <h2>留言板</h2>
+            <div class="message-form-container">
+                <form id="message-form">
+                    <input type="text" id="message-input" placeholder="请输入留言">
+                    <button type="submit">提交</button>
+                </form>
+            </div>
+            <div id="message-display">
+                <!-- 这里将显示用户的留言 -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>版权所有 &copy; 2025 Orange的网页</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

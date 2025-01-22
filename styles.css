@@ -1,0 +1,137 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4e0d0; /* 整体的背景颜色，偏橙色 */
+}
+header {
+    background-color: #ff8c00; /* 深橙色背景 */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+nav {
+    background-color: #ffa500; /* 导航栏的橙色背景 */
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+nav li {
+    margin: 0;
+}
+nav li a.nav-link {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+nav li a.nav-link:hover, nav li a.nav-link.active {
+    background-color: #ff8c00; /* 鼠标悬停或选中时为深橙色 */
+}
+main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+section {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 800px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+h2 {
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+.game-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.game-item {
+    flex-basis: calc(33.33% - 10px); /* 每个游戏项占据约三分之一的宽度，减去间距 */
+    margin-bottom: 20px;
+}
+.game-item img {
+    width: 100%; /* 图片宽度占满父元素 */
+    height: auto;
+    aspect-ratio: 1 / 1; /* 保持 1:1 的宽高比，形成正方形 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: block; /* 去除图片底部的间隙 */
+}
+.game-item p {
+    text-align: center;
+    margin: 5px 0;
+    font-size: 18px;
+    color: #333;
+}
+.tool-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.tool-button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.tool-button:hover {
+    background-color: #555;
+}
+.message-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#message-board input, #message-board button {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px;
+}
+#message-board button {
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+#message-board button:hover {
+    background-color: #555;
+}
+#message-display {
+    border-top: 2px solid #ddd;
+    padding-top: 10px;
+}
+#message-display p {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
