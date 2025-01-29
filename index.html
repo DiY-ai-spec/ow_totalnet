@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orange的网页</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header>
         <h1>Orange的网页</h1>
@@ -56,9 +58,27 @@
         </section>
         <section id="message-board">
             <h2>留言板</h2>
-            <div class="message-form-container">
+            <div id="login-register">
+                <h3>登录</h3>
+                <form id="login-form">
+                    <input type="text" id="login-username" placeholder="用户名">
+                    <input type="password" id="login-password" placeholder="密码">
+                    <button type="submit">登录</button>
+                </form>
+                <h3>注册</h3>
+                <form id="register-form">
+                    <input type="text" id="register-username" placeholder="用户名">
+                    <input type="password" id="register-password" placeholder="密码">
+                    <button type="submit">注册</button>
+                </form>
+            </div>
+            <div id="message-form-container" style="display: none;">
                 <form id="message-form">
                     <input type="text" id="message-input" placeholder="请输入留言">
+                    <select id="visible-to">
+                        <option value="all">所有人可见</option>
+                        <option value="creator-and-admin">仅本人和管理员可见</option>
+                    </select>
                     <button type="submit">提交</button>
                 </form>
             </div>
@@ -70,6 +90,8 @@
     <footer>
         <p>版权所有 &copy; 2025 Orange的网页</p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
