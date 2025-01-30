@@ -22,17 +22,26 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // 注册
-    registerForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const username = document.getElementById('register-username').value;
-        const password = document.getElementById('register-password').value;
-        try {
-            const response = await axios.post('/register', { username, password });
-            alert(response.data.message);
-        } catch (error) {
+registerForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const username = document.getElementById('register-username').value;
+    const password = document.getElementById('register-password').value;
+    if (username.trim() === '' || password.trim() === '') {
+        alert('用户名和密码不能为空');
+        return;
+    }
+    try {
+        const response = await axios.post('/register', { username, password });
+        alert(response.data.message);
+    } catch (error) {
+        console.error('注册错误:', error.response? error.response.data : error.message);
+        if (error.response && error.response.data.error) {
             alert(error.response.data.error);
+        } else {
+            alert('注册失败，请检查网络或联系管理员');
         }
-    });
+    }
+});
 
     // 登录
     loginForm.addEventListener('submit', async (e) => {
