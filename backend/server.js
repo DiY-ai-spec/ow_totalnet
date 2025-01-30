@@ -6,7 +6,11 @@ const bcrypt = require('bcryptjs');
 const app = express();
 const port = 3000;
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://your-frontend-domain.com', // 替换为你的前端域名
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 // 连接 MongoDB
@@ -47,6 +51,7 @@ app.post('/register', async (req, res) => {
         await newUser.save();
         res.status(201).json({ message: '注册成功' });
     } catch (error) {
+        console.error('注册错误:', error);
         res.status(400).json({ error: error.message });
     }
 });
