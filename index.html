@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orange的网页</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -59,19 +60,20 @@
         <section id="message-board">
             <h2>留言板</h2>
             <div id="login-register">
-                <h3>登录</h3>
+                <h4>登录</h4>
                 <form id="login-form">
                     <input type="text" id="login-username" placeholder="用户名">
                     <input type="password" id="login-password" placeholder="密码">
                     <button type="submit">登录</button>
                 </form>
-                <h3>注册</h3>
+                <h4>注册</h4>
                 <form id="register-form">
                     <input type="text" id="register-username" placeholder="用户名">
                     <input type="password" id="register-password" placeholder="密码">
                     <button type="submit">注册</button>
                 </form>
             </div>
+            <h6>*站主未开启权限，暂时就是个摆设嘿</h6>
             <div id="message-form-container" style="display: none;">
                 <form id="message-form">
                     <input type="text" id="message-input" placeholder="请输入留言">
@@ -86,12 +88,91 @@
                 <!-- 这里将显示用户的留言 -->
             </div>
         </section>
+        <!-- 添加机器人图像和聊天框 -->
+        <img id="robot-icon" src="pic/robot.png" alt="机器人" style="width: 80px; height: 80px; position: fixed; bottom: 20px; right: 20px; cursor: pointer;">
+        <div id="chat-modal" class="container mt-5" style="display: none;">
+            <h1 class="mb-4">Chat with 智能小可爱</h1>
+            <h5 class="mb-8">（使用我之前，您需要找站主，让她帮您在后端开启一下连接噢~）</h5>
+            <h5 class="mb-8">（另外，第一次跟您聊天，您能让我自我介绍一下嘛~请直接复制冒号后面的3个字问我：你是谁）</h5>
+            <div id="chat-container" class="mb-3" style="height: 400px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; display: flex; flex-direction: column;"></div>
+            <div class="input-group">
+                <input type="text" id="question" class="form-control" placeholder="请输入你的问题" onkeydown="handleKeyDown(event)">
+                <button class="btn btn-primary" onclick="sendQuestion()">发送</button>
+            </div>
+        </div>
     </main>
     <footer>
         <p>版权所有 &copy; 2025 Orange的网页</p>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
+    <script>
+        document.getElementById('robot-icon').addEventListener('click', function() {
+            const chatModal = document.getElementById('chat-modal');
+            chatModal.style.display = chatModal.style.display === 'none'? 'block' : 'none';
+        });
+
+        async function sendQuestion() {
+            const question = document.getElementById('question').value;
+            if (!question) return;
+            const chatContainer = document.getElementById('chat-container');
+            const userMessageDiv = document.createElement('div');
+            userMessageDiv.classList.add('user-message');
+            userMessageDiv.textContent = question;
+            const userTimestamp = document.createElement('span');
+            userTimestamp.classList.add('message-timestamp');
+            userTimestamp.textContent = new Date().toLocaleTimeString();
+            userMessageDiv.appendChild(userTimestamp);
+            chatContainer.appendChild(userMessageDiv);
+            document.getElementById('question').value = '';
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ question })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`请求失败，状态码: ${response.status}`);
+                }
+
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                const botMessageDiv = document.createElement('div');
+                botMessageDiv.classList.add('bot-message');
+                const botTimestamp = document.createElement('span');
+                botTimestamp.classList.add('message-timestamp');
+                botTimestamp.textContent = new Date().toLocaleTimeString();
+                botMessageDiv.appendChild(botTimestamp);
+                chatContainer.appendChild(botMessageDiv);
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    const chunk = decoder.decode(value);
+                    botMessageDiv.textContent += chunk;
+                }
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            } catch (error) {
+                console.error('发生错误:', error);
+                const errorMessageDiv = document.createElement('div');
+                errorMessageDiv.classList.add('bot-message');
+                errorMessageDiv.textContent = `发生错误: ${error.message}`;
+                chatContainer.appendChild(errorMessageDiv);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+        }
+
+        function handleKeyDown(event) {
+            if (event.key === 'Enter' &&!event.shiftKey) {
+                event.preventDefault();
+                sendQuestion();
+            }
+        }
+    </script>
 </body>
 
 </html>
