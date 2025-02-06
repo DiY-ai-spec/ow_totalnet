@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4e0d0; /* 整体的背景颜色，偏橙色 */
+    background-color: #f4e0d0!important; /* 整体的背景颜色，偏橙色 */
 }
 header {
     background-color: #ff8c00; /* 深橙色背景 */
@@ -134,4 +134,40 @@ footer {
     padding: 10px;
     text-align: center;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 聊天框样式 */
+#chat-container {
+    height: 400px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: white; /* 设置聊天框背景颜色为白色 */
+}
+
+.user-message {
+    background-color: #FFE4B5; /* 浅橙色 */
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    align-self: flex-end;
+    max-width: 70%;
+}
+
+.bot-message {
+    background-color: #e9e9e9;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    align-self: flex-start;
+    max-width: 70%;
+}
+
+.message-timestamp {
+    font-size: 12px;
+    color: #999;
+    display: block;
+    text-align: right;
 }
